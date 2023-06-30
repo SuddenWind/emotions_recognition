@@ -21,6 +21,11 @@ class Emotion_recognition:
 if __name__ == "__main__":
     recognition = Emotion_recognition()
     preprocessor = Preprocess(GPU=False)
+    
+    start_time = time.time()
+    x = 1 # displays the frame rate every 1 second
+    counter = 0
+    fps = []
 
     while True:
         ret, image = recognition.cam.read()
@@ -28,6 +33,7 @@ if __name__ == "__main__":
 
         if cv2.waitKey(1) & 0xFF == ord('q'):
             cv2.destroyAllWindows()
+            print(fps)
             break
     
         start = time.time()
@@ -42,3 +48,11 @@ if __name__ == "__main__":
             cv2.putText(face_aligned, emotion, (10,30), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2, cv2.LINE_AA)
             # display the output images
             cv2.imshow('Result', face_aligned)
+            
+        counter+=1
+        if (time.time() - start_time) > x :
+            fps.append(counter / (time.time() - start_time))
+            print("FPS: ", counter / (time.time() - start_time))
+            counter = 0
+            start_time = time.time()
+    
