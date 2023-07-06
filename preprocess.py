@@ -144,7 +144,7 @@ class Preprocess:
 
     def run_with_CPU(self, image):
         image = self.autoAdjustments_with_convertScaleAbs(image, .005, .995)
-
+        image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
         gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
         # detect faces in the grayscale image
