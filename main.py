@@ -20,6 +20,7 @@ class Emotion_recognition:
     def predict(self, img):
         return self.model.predict(img)
     
+    
 def main():
     while True:
         ret, image = recognition.cam.read()
@@ -42,6 +43,7 @@ def main():
         
         
 def main_wcounter():
+    ''' same as main but with FPS ''' 
     start_time = time.time()
     x = 1             # displays the frame rate every 1 second
     counter = 0
@@ -67,6 +69,7 @@ def main_wcounter():
             print(emotion)
             cv2.putText(face_aligned, emotion, (10,30), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2, cv2.LINE_AA)
             # display the output images
+            face_aligned = cv2.cvtColor(face_aligned, cv2.COLOR_RGB2BGR)
             cv2.imshow('Result', face_aligned)
             
         counter += 1
